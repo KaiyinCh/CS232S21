@@ -13,23 +13,10 @@ int main () {
 
   // fgets(buf, MAX_BUF, getchar());
   // len = strlen(buf) - 1;
-
-while (fgets(buf, MAX_BUF, stdin) != NULL || fgets(buf, MAX_BUF, stdin) != NULL) {
-  len = strlen(buf);
-  count++;
-  //buf[len] = (fgets(buf, MAX_BUF, stdin));
+do{
+fgets(buf, MAX_BUF, stdin);
+len = strlen(buf);
   
-}//do(())
-//free(l);
-
-  // while ((ch = getchar()) != EOF && len < MAX_BUF) {
-  //   buf[len] = ch;
-  //   ++len;
-  // }
-  len = len - count;
-
-  
-
   for (i = 0; i < len; i++){
     
     if (buf[i] >= 'a' && buf[i] <= 'z'){
@@ -39,6 +26,23 @@ while (fgets(buf, MAX_BUF, stdin) != NULL || fgets(buf, MAX_BUF, stdin) != NULL)
       letter_frequency[buf[i] - 65]++;
     }
   }
+ 
+}while (len < 1);
+  
+  //buf[len] = (fgets(buf, MAX_BUF, stdin));
+  
+
+//free(l);
+
+  // while ((ch = getchar()) != EOF && len < MAX_BUF) {
+  //   buf[len] = ch;
+  //   ++len;
+  // }
+  //len = len - count;
+
+  
+
+  
 
   printf("Distribution of letters in corpus:\n");
   for (i = 0; i < 26; i++) {

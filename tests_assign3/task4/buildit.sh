@@ -6,7 +6,6 @@ YELLOW='\033[1;33m'
 GREEN='\033[0;32m'
 echo "$cmd"
 echo "*******Now start building***************"
-cp ../pre_test_get_bits.c test_get_bits.c
 output=`$cmd 2<&1`
 echo $output
 

@@ -6,27 +6,31 @@ typedef struct node {
 } node_t;
 
 node_t * construct_3_strs() {
-  node_t* x = NULL; 
-  x = (node_t *)malloc(sizeof(node_t));
-  x->value = "CS232";
-  x->next = (node_t *) malloc(sizeof(node_t));        
+
+  node_t * x = (node_t*) malloc(sizeof(node_t));
+  x->
+  //x->value = "CS232";
+  //strcpy(x->value, "CS232");
+  x->next = (node_t*) malloc(sizeof(node_t));
+  //strcpy(x->next, "is");
   x->next->value = "is";
-  x->next->next = (node_t *) malloc(sizeof(node_t));
-  x->next->next->value = "awesome";    
-  x->next->next->next = (node_t *) malloc(sizeof(node_t));
+  x->next->next = (node_t*) malloc(sizeof(node_t));
+  x->next->next->value = "awesome";
+  //strcpy(x->next->next, "awesome");
+  //x->next->next->next = (node_t*) malloc(sizeof(node_t));
   x->next->next->next = x;
 
   return x;
+    //return NULL;//just to pass compiler, please edit as needed.
 }
 
 //You can ignore the following code for testing
 int dump_all(node_t*);
 int main (int argc, char ** argv) {
-    node_t * x = construct_3_strs();
+  node_t *x = (node_t*)malloc(sizeof(node_t));
+    x = construct_3_strs();
     dump_all(x);
-
-    return 1;
-
+    free(x);
 }
 
 int dump_all(node_t * x) {
@@ -39,12 +43,9 @@ int dump_all(node_t * x) {
     if(z->next != x) {
     	printf("failed");
       free(z);
-      free(x);
-	return -1;
+	  return -1;
     } else {
-        free(z);
-        free(x);
-        //free(x)
-        return 0;
+      free(z);
+      return 0;
     }
 }
