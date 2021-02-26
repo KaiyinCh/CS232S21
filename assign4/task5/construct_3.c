@@ -16,7 +16,20 @@ node_t * construct_3() {
     //Dereference each pointer to access the .next field in its pointee, 
     //and use pointer assignment to set the .next field to point to the appropriate Node. 
 
+    node_t* x = NULL; 
+    x = (node_t *)malloc(sizeof(node_t) *1);
+
+    x->value = 1;
+    x->next = (node_t *) malloc(sizeof(node_t) *1);  // y
+    x->next->value = 2;
+    x->next->next = (node_t *) malloc(sizeof(node_t) *1); // z
+    x->next->next->value = 3;
+    x->next->next->next = (node_t *) malloc(sizeof(node_t) *1);
+    x->next->next->next = x;
+
+    return x;
 }
+
 
 //You can ignore the following code for testing
 int dump_all(node_t*);
@@ -33,11 +46,18 @@ int dump_all(node_t * x) {
     printf("%d -> %d\n", x->value, y->value);
     node_t * z = y->next;
     printf("%d -> %d\n", y->value, z->value);
+    free(y);
     if(z->next != x) {
     	printf("failed");
+        free(z);
+        free(x);
 	return -1;
     } else {
         printf("%d -> %d\n", z->value, x->value);
+        free(z);
+        free(x);
         return 0;
     }
+
+    //free(x;)
 }
