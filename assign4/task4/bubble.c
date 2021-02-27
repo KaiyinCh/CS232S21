@@ -10,8 +10,10 @@
 int main()
 {
   char * Strings[NUM];
+  int i, j;
 
   printf("Please enter %d strings, one per line:\n", NUM);
+  
 
   /* Write a for loop here to read NUM strings.
 
@@ -22,11 +24,23 @@ int main()
 	 be LEN bytes long.  
 	 Note that the newline and NULL characters will be included in LEN.
   */
+  
+  for (int i = 0; i < NUM; i++){
+    // char *input;
+    // scanf("%c", input);
+    fgets(Strings[i], LEN-2, stdin);
+
+  }
 
   puts("\nHere are the strings in the order you entered:");
 
   /* Write a for loop here to print all the strings. */
 
+    
+    for (int i = 0; i < LEN-2; i++){
+      puts(Strings[i]);
+      //printf("%s\n", Strings[i]);
+    }
   
   /* Bubble sort */
   /* Write code here to bubble sort the strings in ascending alphabetical order
@@ -41,10 +55,25 @@ int main()
       (iii) You are allowed to use strlen() to calculate string lengths.
   */
   /* Output sorted list */
+
+  for (i = 0; i < NUM; i++){
+    for (j = 1; j < NUM; j++){
+      if(Strings[j] < Strings[i]){
+        char *temp = Strings[i];
+        Strings[i] = Strings[j];
+        Strings[j] = temp;
+      }
+    }
+  }
   
   puts("\nIn alphabetical order, the strings are:");     
   /* Write a for loop here to print all the strings. Feel free to use puts/printf
      etc. for printing each string.
   */
+  for(i = 0; i < NUM; i++){
+    printf("%s\n", Strings[i]);
+  }
+
+  return 0;
 
 }

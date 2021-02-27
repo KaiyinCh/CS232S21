@@ -38,6 +38,8 @@ int main (int argc, char ** argv) {
     dump_all(x);
     free(x);
 
+    return 0;
+
 }
 
 int dump_all(node_t * x) {

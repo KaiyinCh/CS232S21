@@ -6,22 +6,25 @@ typedef struct node {
 } node_t;
 
 node_t * construct_3_strs() {
+  node_t *x, *y, *z;
 
-  node_t * x = (node_t*) malloc(sizeof(node_t));
-  x->
-  //x->value = "CS232";
-  //strcpy(x->value, "CS232");
-  x->next = (node_t*) malloc(sizeof(node_t));
-  //strcpy(x->next, "is");
-  x->next->value = "is";
-  x->next->next = (node_t*) malloc(sizeof(node_t));
-  x->next->next->value = "awesome";
-  //strcpy(x->next->next, "awesome");
-  //x->next->next->next = (node_t*) malloc(sizeof(node_t));
-  x->next->next->next = x;
+  x = (node_t*) malloc(sizeof(node_t)*3);
+  x->value = (char *) malloc(sizeof(char) *5);
+  x->value = "CS232";
+
+  y = (node_t*) malloc(sizeof(node_t)*3);
+  y->value = (char *) malloc(sizeof(char) *5);
+  y->value = "is"; 
+
+  z = (node_t*) malloc(sizeof(node_t)*3);
+  z->value = (char *) malloc(sizeof(char) *5);
+  z->value = "awesome";
+
+  x->next = y;
+  y->next = z;
+  z->next = x;
 
   return x;
-    //return NULL;//just to pass compiler, please edit as needed.
 }
 
 //You can ignore the following code for testing
@@ -30,7 +33,9 @@ int main (int argc, char ** argv) {
   node_t *x = (node_t*)malloc(sizeof(node_t));
     x = construct_3_strs();
     dump_all(x);
+    //free(x->value);
     free(x);
+    return 0;
 }
 
 int dump_all(node_t * x) {
@@ -39,12 +44,15 @@ int dump_all(node_t * x) {
     printf(" %s", y->value);
     node_t * z = y->next;
     printf(" %s\n", z->value);
+    //free(y->value);
     free(y);
     if(z->next != x) {
     	printf("failed");
+      //free(z->value);
       free(z);
 	  return -1;
     } else {
+     // free(z->value);
       free(z);
       return 0;
     }
