@@ -2,16 +2,21 @@
 
 #include <stdio.h>  /* Need for standard I/O functions */
 #include <string.h> /* Need for strlen() */
+#include <stdlib.h>
 
 
 #define NUM 30   /* number of strings */
 #define LEN 1200  /* max length of each string */
 
+//public void swap(char arr, int a);
+
 int main()
 {
   char * Strings[NUM];
+  int i, j;
 
-  printf("Please enter %d strings, one per line:\n", NUM);
+  //printf("Please enter %d strings, one per line:\n", NUM);
+  
 
   /* Write a for loop here to read NUM strings.
 
@@ -22,11 +27,28 @@ int main()
 	 be LEN bytes long.  
 	 Note that the newline and NULL characters will be included in LEN.
   */
+ 
+  char temp[LEN-2];
+  for (i = 0; i < NUM; i++){
+    fgets(temp, LEN-2, stdin);
+    char *a = (char*)malloc(sizeof(strlen(temp)+1));
 
-  puts("\nHere are the strings in the order you entered:");
+    for(j = 0; j < strlen(temp); j++){
+      *(a+j) = *(temp + j);
+    }
 
-  /* Write a for loop here to print all the strings. */
+    *(a+(strlen(a) - 1)) = '\0';
+    Strings[i] = a;
+  }
+  
 
+  // puts("\nHere are the strings in the order you entered:");
+
+  // /* Write a for loop here to print all the strings. */
+
+    // for (i = 0; i < NUM; i++){
+    //   printf("%s\n", Strings[i]);
+    // }  
   
   /* Bubble sort */
   /* Write code here to bubble sort the strings in ascending alphabetical order
@@ -41,10 +63,27 @@ int main()
       (iii) You are allowed to use strlen() to calculate string lengths.
   */
   /* Output sorted list */
+
+
+  for (i = 0; i < NUM; i++){
+    for (j = 0; j < NUM-1; j++){
+      if(Strings[j] < Strings[i]){
+        char *temp = Strings[i];
+        *Strings[i] = Strings[j];
+        *Strings[j] = temp;
+      }
+    }
+  }
   
-  puts("\nIn alphabetical order, the strings are:");     
+  //puts("\nIn alphabetical order, the strings are:");     
   /* Write a for loop here to print all the strings. Feel free to use puts/printf
      etc. for printing each string.
   */
+  for(i = 0; i < NUM; i++){
+    printf("%s\n", Strings[i]);
+  }
+
+
+  return 0;
 
 }

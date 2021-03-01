@@ -23,7 +23,6 @@ node_t * construct_3() {
   x->next->value = 2;
   x->next->next = (node_t*) malloc(sizeof(node_t));
   x->next->next->value = 3;
-  //x->next->next->next = (node_t*) malloc(sizeof(node_t));
   x->next->next->next = x;
 
   return x;
@@ -38,6 +37,7 @@ int main (int argc, char ** argv) {
     dump_all(x);
     free(x);
 
+    return 0;
 }
 
 int dump_all(node_t * x) {
