@@ -33,6 +33,7 @@ int main (int argc, char ** argv) {
   node_t *x = (node_t*)malloc(sizeof(node_t));
     x = construct_3_strs();
     dump_all(x);
+    //free(x->value);
     free(x);
     return 0;
 }
@@ -43,12 +44,15 @@ int dump_all(node_t * x) {
     printf(" %s", y->value);
     node_t * z = y->next;
     printf(" %s\n", z->value);
+    //free(y->value);
     free(y);
     if(z->next != x) {
     	printf("failed");
+      //free(z->value);
       free(z);
 	    return -1;
     } else {
+     // free(z->value);
       free(z);
       return 0;
     }
