@@ -8,21 +8,21 @@ int main () {
   int letter_frequency[26] = {0};
   int len, i;
   char buf[MAX_BUF];
+  
 
-while (fgets(buf, MAX_BUF, stdin) != NULL){
+  while (fgets(buf, MAX_BUF, stdin) != NULL){
   
-  len = strlen(buf);
+    len = strlen(buf);
   
-  for (i = 0; i <= len; i++){
-    if (buf[i] >= 'a' && buf[i] <= 'z'){
-      letter_frequency[buf[i] - 'a']++;
-    }
-    if (buf[i] >= 'A' && buf[i] <= 'Z'){
-      letter_frequency[buf[i] - 'A']++;
+    for (i = 0; i <= len; i++){
+      if (buf[i] >= 'a' && buf[i] <= 'z'){
+        letter_frequency[buf[i] - 'a']++;
+      }
+      if (buf[i] >= 'A' && buf[i] <= 'Z'){
+        letter_frequency[buf[i] - 'A']++;
+      }
     }
   }
-  
-}
 
   printf("Distribution of letters in corpus:\n");
   for (i = 0; i < 26; i++) {
