@@ -139,7 +139,7 @@ void mystring_cat(mystring_t *s, char *s2) {
   // append null character
   result[h - 1] = '\0';
   return result;
- s->data = result->data;
+ //s->data = result->data;
   // for (int i = 0; i < start->size; i++){
   //   if (mystring_get(s, i) == '\0'){
   //     //s->data[i] = (char *) malloc(sizeof(char));
