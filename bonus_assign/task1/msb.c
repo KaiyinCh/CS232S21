@@ -22,19 +22,24 @@ int main(int argc, char **argv) {
 int msb(int x) {
 	if (x==0) return -1;
                 
-	int w, ep, mask;
+	int w, ep, mask, counter;
 	w=32; // Number of bits that might contain most significant 1
 	ep=0; // Rightmost bit that might contain most significant 1
+  counter = 0;
 
 	while(w > 1) { //Narrow down to a single bit
     w >>= 1; // w = 16, 8, 4, 2, 1
-    ep += w;
-    mask = ~(~0 << w) << ep;
+    //ep += w;
+    counter += w;
+    
+    mask = ~(~0 << w) << counter;
   
     if((mask & x) == 0){
-      ep-=w;
+      counter -= w;
+      ep = counter;
     }
     printf("M= "); print_binary(mask); printf(" hw=%d ep=%d\n",w,ep); 
+    
 	}
 	return ep;
 }
