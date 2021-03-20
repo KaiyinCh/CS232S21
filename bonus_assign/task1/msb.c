@@ -21,6 +21,7 @@ int main(int argc, char **argv) {
 
 int msb(int x) {
 	if (x==0) return -1;
+  //if (x < 0) return 31;
                 
 	int w, ep, mask, counter;
 	w=32; // Number of bits that might contain most significant 1
@@ -38,7 +39,12 @@ int msb(int x) {
       counter -= w;
       ep = counter;
     }
-    printf("M= "); print_binary(mask); printf(" hw=%d ep=%d\n",w,ep); 
+
+    printf("M= "); print_binary(mask); printf(" hw=%d ep=%d\n",w,ep);
+    
+    if(x < 0){
+      ep = ep+w;
+    }
     
 	}
 	return ep;

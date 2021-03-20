@@ -9,6 +9,7 @@
 struct mystring_t {
 	size_t size;
 	char *data;
+  mystring_t *next;
 };
 
 /* Utility function to handle allocation failures. In this
@@ -72,7 +73,7 @@ mystring_t *mystring_new() {
     return NULL;
   }
 
-  retval->data[0] = '0';
+  retval->data[0] = ' ';
   
 	return retval;
 }
@@ -82,18 +83,26 @@ char mystring_get(mystring_t *s, size_t loc) {
 	//YOUR CODE HERE
   if (loc < s->size && loc >= 0){
     return s->data[loc];
-  }else{
-    perror("refuse to serve you");
-    return 0;
   }
+  else{
+    //perror("Out of bound.");
+    return '\0';
+  }
+  
 }
 
 /* Free up the memory allocated for the passed mystring.
    Remember, you need to free up ALL the memory that was allocated. */
 void mystring_delete(mystring_t *s) {
 	/* YOUR CODE HERE */
-  free(s->data);
-  free(s);
+  mystring_t* temp = s;
+  while(temp->next != NULL){
+    temp = temp->next;
+    mystring_delete(temp);
+    return;
+  }
+  free(temp->data);
+  free(temp);
 }
 
 int mystring_get_len(mystring_t *s) {
@@ -101,57 +110,30 @@ int mystring_get_len(mystring_t *s) {
   return s->size;
 }
 
-char* mystring_get_data(mystring_t *s) {
-	/* YOUR CODE HERE*/
-  // for (int i=0; i < s->size; i++){
-  // //   return s->data[i];
-  //   printf("%d", s->data[i]);
-  // }
-
-
-  // if (loc < s->size && loc >= 0){
-  //   return s->data[loc];
-  // }else{
-  //   //perror("refuse to serve you");
-  //   return 0;
-  // }
-  
+char* mystring_get_data(mystring_t *s) {  
+  /* YOUR CODE HERE */
+  mystring_t *temp = s;
+  while(temp->next != NULL){
+    temp = temp->next;
+    mystring_get_data(temp);
+    printf("%s", temp->data);
+  }
 	return s->data;
 }
 
 void mystring_cat(mystring_t *s, char *s2) {
 	/* YOUR CODE HERE*/
-
-  int i = 0, j = 0;
-  int cont = 0;
-  int h = s->size + s2->size + 1;
-
-  char *result = (char*)malloc(h * sizeof(char));
-
-  for(i = 0; i < s->size; i++) {
-    result[i] = s[i];
+  size_t len;
+  int j=0;
+  for (len = 0; *(s2+len) != '\0'; len++){
+    len++;
   }
-
-  for(j = i; j < s2->size + s->size; j++) {
-    result[j] = s2[cont++];
+  s->data = (char *)realloc(s->data, sizeof(char)*(s->size + len));
+  for(int i = s->size; i < (s->size+len); i++){
+    s->data[i] = *(s2+j);
+    j++;
   }
-
-  // append null character
-  result[h - 1] = '\0';
-  return result;
- //s->data = result->data;
-  // for (int i = 0; i < start->size; i++){
-  //   if (mystring_get(s, i) == '\0'){
-  //     //s->data[i] = (char *) malloc(sizeof(char));
-  //     for(int j = 0; j < idx; j++){
-  //       mystring_set(s, i, start->data[j]);
-  //       i++;
-  //     }
-
-  //   }
-  // }
-
-  
+  s->size = s->size + len;
   
 }
 
@@ -159,19 +141,20 @@ void mystring_cat(mystring_t *s, char *s2) {
    allocation_failed(). Unset space should be value of space */
 void mystring_set(mystring_t *s, size_t loc, char value) {
 	/* YOUR CODE HERE*/
+  int i;
+
   if(loc < s->size && loc >= 0){
     s->data[loc] = value;
-  }else{
-    char * temp_pointer = s->data;
-    s->data = (char *)malloc(sizeof(char) * (loc+1));
-    for(int i = 0; i < s->size; i++){
-      s->data[i] = temp_pointer[i];
-    }
-    for (int i = s->size; i < loc+1; i++){
-      s->data[i] = ' ';
-    }
-    s->data[loc] = value;
-    free(temp_pointer);
-    s->size = loc+1;
   }
+  else{
+    s->data = (char *)realloc(s->data, sizeof(char) * loc+1);
+    for(i = s->size; i < loc+1; i++){
+      s->data[i] = 0;
+    }
+
+    s->data[loc] = value;
+    s->size = loc + 1;
+  }
+
+  return;
 }

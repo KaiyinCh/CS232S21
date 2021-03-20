@@ -5,7 +5,7 @@
 #include "frame.h"
 
 
-typedef struct vector {
+typedef struct vector_t {
    int size;
    frame_t ** data; //point to an array
    

@@ -31,11 +31,9 @@ int main(int argc, char *argv[]) {
   p = n1;
 
   while (p != NULL) {
-    // Complete this line to print the current node's string and   
-    // length (you can use strlen!)
     
-    int len = strlen(p->str);
-    printf("str: %s - length: %d\n", p->str, len); // TODO
+    int len = strlen(p->data);
+    printf("str: %s - length: %d\n", (char *)p->data, len); // TODO
     p = p->next;
 
     // TODO: add code to move p to point to next node

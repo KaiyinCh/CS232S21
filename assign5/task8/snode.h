@@ -7,7 +7,7 @@
 
 struct snode {
   //TODO: change str to dynamic allcoation
-  char *str;
+  void* data;
   //int length;
   struct snode *next;
 };
@@ -15,7 +15,7 @@ struct snode {
 //TODO: change prototypes of functions to remove
 //length
 //struct snode *snode_create(char *s, int length) ; 
-struct snode *snode_create(char *s); 
+struct snode *snode_create(void *s); 
 
 void snode_destroy(struct snode * s) ;
  
