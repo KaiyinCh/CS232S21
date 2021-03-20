@@ -22,7 +22,7 @@ return node;
 }
 void snode_destroy(struct snode * s) 
 {
-  free(s->next);
+  free(s->data);
   free(s);
 
  //TODO: implement snode_destroy
