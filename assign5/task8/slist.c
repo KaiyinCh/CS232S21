@@ -98,8 +98,8 @@ struct snode* slist_find(struct slist *l, void *data){
 void slist_destroy(struct slist *l){
   struct snode *temp = l->front;
   struct snode *counter;
-  while (temp->next != NULL){
-    counter = temp->next->next;
+  while (temp != NULL){
+    counter = temp->next;
     snode_destroy(temp);
     temp = counter;
   }
@@ -149,7 +149,7 @@ void slist_delete(struct slist *l, void *data){
   while(temp != NULL){
     if (strcmp(temp->data, data) == 0){
       node->next = node->next->next;
-      free(temp);
+      snode_destroy(temp);
       return;
     }else{
       node = temp;

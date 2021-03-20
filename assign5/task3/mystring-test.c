@@ -46,12 +46,11 @@ int main(int argc, char **argv) {
 		printf("getlen does not return 501. Test failed!\n");
 	}
 	mystring_delete(s);
-//printf("%ld\n", sizeof("abc124"));
-	 s = mystring_new();
+	s = mystring_new();
 	mystring_cat(s, "hello ");
 	mystring_cat(s, "world");
   
-	 printf("hello world = %s\n",mystring_get_data(s));
+	printf("hello world = %s\n",mystring_get_data(s));
          mystring_delete(s);
 
 	printf("Test complete.\n");

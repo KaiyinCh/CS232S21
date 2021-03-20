@@ -29,10 +29,7 @@ struct slist *slist_create(){
  * returns a pointer to the newly added node
  */
 struct snode* slist_add_back(struct slist *l, char *str){
-  // struct snode* temp = l->back;
-  // temp->str = (char *)malloc((strlen(str)+1)*sizeof(char));
-  // strcpy(temp->str, str);
-  // temp->next = NULL;
+  
   struct snode* temp;
   temp = snode_create(str);
   if(l->front == NULL){
@@ -54,10 +51,7 @@ struct snode* slist_add_back(struct slist *l, char *str){
  * returns a pointer to the newly added node
  */
 struct snode* slist_add_front(struct slist *l, char *str){
-  // struct snode* temp = l->front;
-  // temp->str = (char *)malloc((strlen(str)+1)*sizeof(char));
-  // strcpy(temp->str, str);
-  // temp->next = l->front;
+
   struct snode* temp;
   temp = snode_create(str);
   if(l->front == NULL){
@@ -98,8 +92,8 @@ struct snode* slist_find(struct slist *l, char *str){
 void slist_destroy(struct slist *l){
   struct snode *temp = l->front;
   struct snode *counter;
-  while (temp->next != NULL){
-    counter = temp->next->next;
+  while (temp != NULL){
+    counter = temp->next;
     snode_destroy(temp);
     temp = counter;
   }
@@ -149,7 +143,7 @@ void slist_delete(struct slist *l, char *str){
   while(temp != NULL){
     if (strcmp(temp->str, str) == 0){
       node->next = node->next->next;
-      free(temp);
+      snode_destroy(temp);
       return;
     }else{
       node = temp;

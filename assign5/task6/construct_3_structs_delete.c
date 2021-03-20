@@ -4,7 +4,7 @@
 typedef struct snode node_t;
 
 node_t * setup() {
-<<<<<<< HEAD
+
     //TODO:copy setup func from task2
   int i;
   
@@ -29,9 +29,9 @@ node_t * setup() {
   head = first;
      
   return head;
-=======
+
     //TODO:copy setup func from previous task
->>>>>>> a7224f3c14bcefbb74f4b42313917f8607faa7c6
+
 }
 
 void teardown(node_t * head) {
@@ -77,13 +77,15 @@ void delete_node_key(node_t **head, char * key) {
     //TODO: implement delete a node based on key
 	//given a certain key, find and delete. 
   node_t * temp = *head;
+  node_t *node = NULL;
   
   while(temp != NULL){
-    if (strcmp(temp->next->str, key) == 0){
-      temp->next = temp->next->next;
-      free(temp->next);
+    if (strcmp(temp->str, key) == 0){
+      node->next = node->next->next;
+      free(temp);
       return;
     }else{
+      node = temp;
       temp = temp->next;
     }
   }

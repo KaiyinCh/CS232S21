@@ -15,7 +15,7 @@ node_t * setup() {
  
   int i;
   
-  node_t * head;// = (node_t*)malloc(sizeof(node_t));
+  node_t * head;
   node_t * first = (node_t*)malloc(sizeof(node_t));
   node_t * second = (node_t*)malloc(sizeof(node_t));
   node_t * third = (node_t*)malloc(sizeof(node_t));

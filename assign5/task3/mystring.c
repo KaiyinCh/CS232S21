@@ -67,7 +67,7 @@ mystring_t *mystring_new() {
     return NULL;
   }
   retval->size = 1;
-  retval->data = (char *) malloc(sizeof(char) * 1);
+  retval->data = (char *) malloc(sizeof(char));
   if(retval->data == NULL){
     perror("failed to allocation data, OOM");
     return NULL;
@@ -85,8 +85,8 @@ char mystring_get(mystring_t *s, size_t loc) {
     return s->data[loc];
   }
   else{
-    //perror("Out of bound.");
-    return '\0';
+    perror("Out of bound.");
+    return ' ';
   }
   
 }
@@ -95,14 +95,8 @@ char mystring_get(mystring_t *s, size_t loc) {
    Remember, you need to free up ALL the memory that was allocated. */
 void mystring_delete(mystring_t *s) {
 	/* YOUR CODE HERE */
-  mystring_t* temp = s;
-  while(temp->next != NULL){
-    temp = temp->next;
-    mystring_delete(temp);
-    return;
-  }
-  free(temp->data);
-  free(temp);
+  free(s->data);
+  free(s);
 }
 
 int mystring_get_len(mystring_t *s) {
@@ -112,12 +106,6 @@ int mystring_get_len(mystring_t *s) {
 
 char* mystring_get_data(mystring_t *s) {  
   /* YOUR CODE HERE */
-  mystring_t *temp = s;
-  while(temp->next != NULL){
-    temp = temp->next;
-    mystring_get_data(temp);
-    printf("%s", temp->data);
-  }
 	return s->data;
 }
 
@@ -125,9 +113,9 @@ void mystring_cat(mystring_t *s, char *s2) {
 	/* YOUR CODE HERE*/
   size_t len;
   int j=0;
-  for (len = 0; *(s2+len) != '\0'; len++){
+  for (len = 0; *(s2+len) != '\0'; len++)
     len++;
-  }
+  
   s->data = (char *)realloc(s->data, sizeof(char)*(s->size + len));
   for(int i = s->size; i < (s->size+len); i++){
     s->data[i] = *(s2+j);
@@ -149,7 +137,7 @@ void mystring_set(mystring_t *s, size_t loc, char value) {
   else{
     s->data = (char *)realloc(s->data, sizeof(char) * loc+1);
     for(i = s->size; i < loc+1; i++){
-      s->data[i] = 0;
+      s->data[i] = ' ';
     }
 
     s->data[loc] = value;
