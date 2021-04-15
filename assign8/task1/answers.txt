@@ -1,0 +1,24 @@
+1.What instruction is “int a, b, c, d;” converted to? 
+  subl $16,%esp
+
+2.Does “int a, b, c, d;” shrink or grow the stack? How many bytes are allocated on stack for a, b, c, and d? Explain them using instruction from question 1.
+  It grow the stack and there are 16 byted are allocated in stack for a, b, c, and d. Because subl $16 and each integer is 4 bytes.
+
+3.What instruction is “b=2;” converted to? How is the address of variable b formed in the instruction?
+  movl $2,-8(%ebp)
+  Because the variable b is located in the second placed of the instruction “int a, b, c, d;”, it symbol is -8.
+
+4.Based on the instructions converted from four assignments, can we claim the declaration order determines the allocation order? For instance, a is declared before b, does it mean a is to be allocated before b on stack? Verify your theory by changing the declaration to “int a, c, b, d;”
+  Yes, we can claim the decoration order determines the allocation order.
+For the instruction "int a, b, c, d;", the address of variables is:
+  movl $1,-4(%ebp)
+  movl $2,-8(%ebp)
+  movl $3,-12(%ebp)
+  movl $4,-16(%ebp)
+For the instruction "int d, c, b, a;", the address of variables is:
+  movl $1,-16(%ebp)
+  movl $2,-12(%ebp)
+  movl $3,-8(%ebp)
+  movl $4,-4(%ebp)
+The negative number is the location of the varibles located in the instruction.
+
