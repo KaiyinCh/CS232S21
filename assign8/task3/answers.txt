@@ -1,5 +1,6 @@
 1.What instructions evaluate “a>6”?
   cmpl $6,-4(%ebp)
+  
 2.What happens if we delete the “jmp” instruction?
   The "jmp" instruction means unconditional jump. We used "jpm" in the while loop, which means when finished the instructions in the while-loop then go back to check the condition statement again. If we delete the "jmp" instruction, this loop will became a if-loop.
 
