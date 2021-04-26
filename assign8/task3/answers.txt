@@ -1,4 +1,7 @@
 1.What instructions evaluate “a>6”?
+  cmpl $6,-4(%ebp)
 2.What happens if we delete the “jmp” instruction?
-3.Can you rewrite the condition with “jg” in place of “jle” without changing semantic of the program? Why or why not?
+  The "jmp" instruction means unconditional jump. We used "jpm" in the while loop, which means when finished the instructions in the while-loop then go back to check the condition statement again. If we delete the "jmp" instruction, this loop will became a if-loop.
 
+3.Can you rewrite the condition with “jg” in place of “jle” without changing semantic of the program? Why or why not?
+  "jg" means jump if greater, and "jle" means jump if less or equal. The original statement is "if(a > 6)", in the instruction is "cmpl $6,-4(%ebp)  jle .L2".if it change to "if(7 <= a)" will have the same meaning. Therefore, "jle" can not replace "jg" without changing semantic of the program.
